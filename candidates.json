@@ -1,0 +1,470 @@
+[
+  {
+    "candidate_data": {
+      "full_name": "Rahul Birwadkar",
+      "email": "rahul@rahul.in",
+      "phone": "12121212120",
+      "years_experience": "4",
+      "desired_positions": "Software tester",
+      "current_location": "mumbai, India",
+      "tech_stack": "Software testing, AI Testing, Manual testing, Automation Testing, unit testing."
+    },
+    "role_summary": "",
+    "skill_summary": "Primary skills: Software testing, AI testing, manual testing, automation testing, unit testing.",
+    "seniority_label": "Mid-level",
+    "skill_categories": {
+      "Other": [
+        "Software testing",
+        "AI Testing",
+        "Manual testing",
+        "Automation Testing",
+        "unit testing."
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "rahul Birwadkar",
+      "email": "rahul@rahul.com",
+      "phone": "101010101",
+      "years_experience": "3",
+      "desired_positions": "software tester",
+      "current_location": "mumbai india",
+      "tech_stack": "Software testing"
+    },
+    "role_summary": "",
+    "skill_summary": "Primary focus: Software testing.",
+    "seniority_label": "Mid-level",
+    "skill_categories": {
+      "Other": [
+        "Software testing"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "rahul Birwadkar",
+      "email": "rahul@rahul.com",
+      "phone": "101010101",
+      "years_experience": "4",
+      "desired_positions": "software testing",
+      "current_location": "mumbai , india",
+      "tech_stack": "Manual testing, automation testing"
+    },
+    "role_summary": "",
+    "skill_summary": "\"Experienced in manual and automation testing.\"",
+    "seniority_label": "Mid-level",
+    "skill_categories": {
+      "Other": [
+        "Manual testing",
+        "automation testing"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "kiran rasal",
+      "email": "kiran@rasal.com",
+      "phone": "10101010101",
+      "years_experience": "0",
+      "desired_positions": "Devops",
+      "current_location": "heidelberg, germany",
+      "tech_stack": "Docker, python,  html, css, aws, gcp"
+    },
+    "role_summary": "",
+    "skill_summary": "\"Primary stack: Python, HTML, CSS, Docker, with experience in AWS and GCP.\"",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "DevOps/Cloud": [
+        "Docker",
+        "aws",
+        "gcp"
+      ],
+      "Backend": [
+        "python"
+      ],
+      "Frontend": [
+        "html",
+        "css"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "rahul",
+      "email": "rahu@gmail.com",
+      "phone": "9768444495",
+      "years_experience": "4",
+      "desired_positions": "Teacher",
+      "current_location": "delhi, india",
+      "tech_stack": "English, maths, marathi"
+    },
+    "role_summary": "",
+    "skill_summary": "Languages: English, Marathi. Strong background in mathematics.",
+    "seniority_label": "Mid-level",
+    "skill_categories": {
+      "Other": [
+        "English",
+        "maths",
+        "marathi"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "Ajit",
+      "email": "Ajit@fg.com",
+      "phone": "121312123",
+      "years_experience": "4",
+      "desired_positions": "Food Quality Assurance",
+      "current_location": "Sudi",
+      "tech_stack": "Food Technology"
+    },
+    "role_summary": "",
+    "skill_summary": "\"Specialized in Food Technology.\"",
+    "seniority_label": "Mid-level",
+    "skill_categories": {
+      "Other": [
+        "Food Technology"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "Abc",
+      "email": "A@cx.com",
+      "phone": "090989866766",
+      "years_experience": "4",
+      "desired_positions": "Physiotherapist",
+      "current_location": "Mumbai",
+      "tech_stack": "Physiotherapist"
+    },
+    "role_summary": "",
+    "skill_summary": "\"Experienced physiotherapist with a strong background in patient rehabilitation and therapeutic techniques.\"",
+    "seniority_label": "Mid-level",
+    "skill_categories": {
+      "Other": [
+        "Physiotherapist"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "kiran rasal",
+      "email": "kiran@gmail.com",
+      "phone": "101010101",
+      "years_experience": "2",
+      "desired_positions": "Devops",
+      "current_location": "mumbai",
+      "tech_stack": "devops, mlop, nutonix, docker, kubernet"
+    },
+    "role_summary": "",
+    "skill_summary": "\"Primary stack: DevOps, MLOps, Nutanix, Docker, Kubernetes.\"",
+    "seniority_label": "Mid-level",
+    "skill_categories": {
+      "Other": [
+        "devops",
+        "mlop",
+        "nutonix",
+        "kubernet"
+      ],
+      "DevOps/Cloud": [
+        "docker"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "rahul b",
+      "email": "ra@hul.com",
+      "phone": "101010101",
+      "years_experience": "0",
+      "desired_positions": "ai engineer",
+      "current_location": "mumn",
+      "tech_stack": "python, ai, ml"
+    },
+    "role_summary": "",
+    "skill_summary": "Primary stack: Python, AI, ML.",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Backend": [
+        "python"
+      ],
+      "Other": [
+        "ai",
+        "ml"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "Rahul Birwadkar",
+      "email": "rahul@gmail.com",
+      "phone": "1010101010101",
+      "years_experience": "1",
+      "desired_positions": "ai engineer",
+      "current_location": "mumbai",
+      "tech_stack": "Python, Testing, manual"
+    },
+    "role_summary": "",
+    "skill_summary": "\"Primary stack: Python with a focus on testing and manual testing methodologies.\"",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Backend": [
+        "Python"
+      ],
+      "Other": [
+        "Testing",
+        "manual"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "Rahul birwadkar",
+      "email": "rahul@gb.com",
+      "phone": "01010102023",
+      "years_experience": "0",
+      "desired_positions": "AI Engineer",
+      "current_location": "Mumbai",
+      "tech_stack": "AI, ML"
+    },
+    "role_summary": "",
+    "skill_summary": "\"Primary stack: AI, Machine Learning.\"",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Other": [
+        "AI",
+        "ML"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "Kiran",
+      "email": "Kira@hgh.com",
+      "phone": "976655443322",
+      "years_experience": "0",
+      "desired_positions": "Mumbai",
+      "current_location": "Mumbai",
+      "tech_stack": "Ai, ml,"
+    },
+    "role_summary": "",
+    "skill_summary": "\"Primary stack: AI, Machine Learning.\"",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Other": [
+        "Ai",
+        "ml"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "test",
+      "email": "td@g.de",
+      "phone": "12245221112",
+      "years_experience": "1",
+      "desired_positions": "AI Engineer",
+      "current_location": "Mumbai",
+      "tech_stack": "Python, AI"
+    },
+    "role_summary": "",
+    "skill_summary": "\"Primary stack: Python, with a focus on AI.\"",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Backend": [
+        "Python"
+      ],
+      "Other": [
+        "AI"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "test",
+      "email": "td@g.de",
+      "phone": "1021002021",
+      "years_experience": "1",
+      "desired_positions": "AI Engineer",
+      "current_location": "mumbai",
+      "tech_stack": "Python"
+    },
+    "role_summary": "",
+    "skill_summary": "Primary stack: Python.",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Backend": [
+        "Python"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "tes",
+      "email": "ts@f.de",
+      "phone": "12456322533",
+      "years_experience": "1",
+      "desired_positions": "AI Engineer",
+      "current_location": "delhi",
+      "tech_stack": "Python, Devops"
+    },
+    "role_summary": "",
+    "skill_summary": "\"Primary stack: Python with a focus on DevOps practices.\"",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Backend": [
+        "Python"
+      ],
+      "Other": [
+        "Devops"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "rahul birwadkar",
+      "email": "ra@g.de",
+      "phone": "1220120120",
+      "years_experience": 1,
+      "desired_positions": "AI Engineer",
+      "current_location": "Mumbai",
+      "tech_stack": "Python, AI, ML"
+    },
+    "role_summary": "",
+    "skill_summary": "Python with a focus on AI and ML.",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Backend": [
+        "Python"
+      ],
+      "Other": [
+        "AI",
+        "ML"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "rahul",
+      "email": "r@g.de",
+      "phone": "1021020102",
+      "years_experience": 1,
+      "desired_positions": "AI Engineer",
+      "current_location": "mumbai",
+      "tech_stack": "CCN"
+    },
+    "role_summary": "",
+    "skill_summary": "The candidate has experience with CCN (Cisco Certified Network).",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Other": [
+        "CCN"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "ragu",
+      "email": "rd@fb.de",
+      "phone": "123456789",
+      "years_experience": 1,
+      "desired_positions": "tester",
+      "current_location": "mumbra",
+      "tech_stack": "manual testing"
+    },
+    "role_summary": "",
+    "skill_summary": "Proficient in manual testing.",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Other": [
+        "manual testing"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "rah",
+      "email": "rahu@abc.de",
+      "phone": "1234679562",
+      "years_experience": 0,
+      "desired_positions": "AI Engineer, ML Engineer",
+      "current_location": "Mumabi",
+      "tech_stack": "AI, ML, Langchain, RAG"
+    },
+    "role_summary": "",
+    "skill_summary": "The candidate has experience in AI, ML, Langchain, and RAG.",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Other": [
+        "AI",
+        "ML",
+        "Langchain",
+        "RAG"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "Rahul Birwadkar",
+      "email": "rahul@ge.de",
+      "phone": "12345678",
+      "years_experience": 0,
+      "desired_positions": "Full stack developer",
+      "current_location": "mumbai",
+      "tech_stack": "HTML, CSS"
+    },
+    "role_summary": "",
+    "skill_summary": "The candidate is skilled in HTML and CSS.",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "Frontend": [
+        "HTML",
+        "CSS"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "rahul",
+      "email": "rahul@dm.de",
+      "phone": "12345678",
+      "years_experience": 5,
+      "desired_positions": "AI Enginer",
+      "current_location": "mumbai",
+      "tech_stack": "ML"
+    },
+    "role_summary": "",
+    "skill_summary": "Machine Learning (ML).",
+    "seniority_label": "Mid-level",
+    "skill_categories": {
+      "Other": [
+        "ML"
+      ]
+    }
+  },
+  {
+    "candidate_data": {
+      "full_name": "rahul",
+      "email": "ra@gm.de",
+      "phone": "12345678",
+      "years_experience": 1,
+      "desired_positions": "Linux Engineer",
+      "current_location": "mumbai",
+      "tech_stack": "Linux, CMD, powershell"
+    },
+    "role_summary": "",
+    "skill_summary": "Proficient in Linux, CMD, and PowerShell.",
+    "seniority_label": "Junior",
+    "skill_categories": {
+      "DevOps/Cloud": [
+        "Linux"
+      ],
+      "Other": [
+        "CMD",
+        "powershell"
+      ]
+    }
+  }
+]
