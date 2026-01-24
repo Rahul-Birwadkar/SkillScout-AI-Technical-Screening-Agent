@@ -1,50 +1,54 @@
-# 🏆 SkillScout – AI Technical Screening Agent
+🏆 SkillScout – AI Technical Screening Agent
 
-SkillScout is an **AI-powered technical screening assistant** built with **Streamlit** and **LLMs**. It simulates an initial recruiter-led technical interview by collecting candidate details, understanding their tech stack, and dynamically asking context-aware technical questions.
+SkillScout is an AI-powered technical screening assistant built with Streamlit and LLMs. It simulates an initial recruiter-led technical interview by collecting candidate details, understanding their tech stack, and dynamically asking context-aware technical questions.
 
-This project is a **production-style demo** of AI-assisted hiring workflows that is simple to run locally and easy to extend.
+This project is a production-style demo of AI-assisted hiring workflows that is simple to run locally and easy to extend.
 
----
+🚀 Tech Stack
 
-## 🚀 Tech Stack
+Language: Python 3.10+
 
-* **Language:** Python 3.10+
-* **UI:** Streamlit (chat-style interface)
-* **LLM Provider:** OpenAI API
-* **Models:** `gpt-5.2`, `gpt-4o-mini`
-* **State Management:** `st.session_state`
-* **Storage (Demo):** Local JSON (`candidates.json`)
+UI: Streamlit (chat-style interface)
 
----
+LLM Provider: OpenAI API
 
-## ✨ Key Features
+Models: gpt-5.2, gpt-4o-mini
 
-* Conversational candidate intake (profile + consent)
-* Free-text tech stack understanding and cleanup
-* Automatic skill grouping (rule-based, deterministic)
-* Context-aware technical questions with follow-ups
-* Global screening limit (**max 20 questions**)
-* Stateless LLMs with stateful app control
-* Clean interview-style UI (no exposed internal labels)
+State Management: st.session_state
 
----
+Storage (Demo): Local JSON (candidates.json)
 
-## 🧠 High-Level Architecture
+✨ Key Features
 
-SkillScout uses multiple specialized LLM agents, orchestrated by the app:
+Conversational candidate intake (profile + consent)
 
-* **Role Understanding Agent** – normalizes desired roles and infers seniority
-* **Skill Summary Agent** – cleans and summarizes the tech stack
-* **Technical Question Agent** – generates category-based interview questions
-* **Fallback Agent** – handles unclear or off-topic input
+Free-text tech stack understanding and cleanup
 
-All agents are **stateless**. The application manages memory, flow, and limits.
+Automatic skill grouping (rule-based, deterministic)
 
----
+Context-aware technical questions with follow-ups
 
-## 📂 Project Structure
+Global screening limit (max 20 questions)
 
-```text
+Stateless LLMs with stateful app control
+
+Clean interview-style UI (no exposed internal labels)
+
+🧠 High-Level Architecture
+
+SkillScout uses multiple specialized LLM agents, orchestrated by the application:
+
+Role Understanding Agent – normalizes desired roles and infers seniority
+
+Skill Summary Agent – cleans and summarizes the tech stack
+
+Technical Question Agent – generates category-based interview questions
+
+Fallback Agent – handles unclear or off-topic input
+
+All agents are stateless. The application manages memory, flow, and limits.
+
+📂 Project Structure
 .
 ├── app.py          # Main Streamlit app & interview flow
 ├── ui.py           # UI components and layout helpers
@@ -53,16 +57,11 @@ All agents are **stateless**. The application manages memory, flow, and limits.
 ├── requirements.txt
 ├── candidates.json # Demo storage (created at runtime)
 └── README.md
-```
 
----
-
-## 🛠️ Installation & Run
-
-```bash
+🛠️ Installation & Run (Local)
 # 1. Clone the repository
-git clone https://github.com/your-username/skillscout-ai-hiring-assistant.git
-cd skillscout-ai-hiring-assistant
+git clone https://github.com/Rahul-Birwadkar/SkillScout-AI-Technical-Screening-Agent.git
+cd SkillScout-AI-Technical-Screening-Agent
 
 # 2. Create and activate virtual environment
 python -m venv venv
@@ -78,43 +77,109 @@ setx OPENAI_API_KEY "your_api_key"      # Windows
 
 # 5. Run the app
 streamlit run app.py
-```
 
----
+🧪 How to Use
 
-## 🧪 How to Use
+Open the Streamlit app in your browser
 
-1. Open the Streamlit app in your browser.
-2. Enter candidate profile details.
-3. Provide your tech stack (free text).
-4. Give consent (Yes / No).
-5. Answer technical questions like a real interview.
-6. Type `exit` anytime to stop the screening.
+Enter candidate profile details
+
+Provide your tech stack (free text)
+
+Give consent (Yes / No)
+
+Answer technical questions like a real interview
+
+Type exit anytime to stop the screening
 
 A live candidate profile and detected skills are shown in the sidebar during the interview.
 
----
+🎯 Design Philosophy
 
-## 🎯 Design Philosophy
+Stateless LLMs with predictable application logic
 
-* Stateless LLMs, predictable app logic
-* Prompt engineering over fine-tuning
-* Human-like interview flow
-* Clear separation of concerns:
+Prompt engineering over fine-tuning
 
-  * Flow & logic → `app.py`
-  * UI → `ui.py`
-  * LLM calls → `llm_client.py`
-  * Prompts → `prompts.py`
+Human-like interview flow
 
----
+Clear separation of concerns:
 
-## 📜 License
+Flow & logic → app.py
 
-This project is provided for **educational and demonstration purposes**. You are free to modify and extend it for personal or academic use.
+UI → ui.py
 
----
+LLM calls → llm_client.py
 
-## 🙌 Acknowledgements
+Prompts → prompts.py
 
-Built as an AI/ML hiring assistant demo using **Streamlit** and
+☁️ GCP Deployment (Cloud Run)
+
+SkillScout is deployed on Google Cloud Platform (GCP) using a modern, serverless, container-based workflow.
+
+Deployment Stack
+
+Docker – Containerization
+
+Cloud Build – Cloud-based Docker image build
+
+Artifact Registry – Container image storage
+
+Cloud Run – Serverless application hosting
+
+Key Characteristics
+
+Fully serverless (no VM management)
+
+Automatic scaling
+
+Secure secret handling via environment variables
+
+Production-style deployment pipeline
+
+Deployment Flow
+
+Streamlit app is packaged using Docker
+
+Cloud Build builds the container image
+
+Image is stored in Artifact Registry
+
+Cloud Run deploys the image as a managed service
+
+OpenAI API key is injected securely at runtime
+
+Live Deployments
+
+Streamlit Cloud (Demo):
+https://skillscout-ai-technical-screening-agent-pi9anz2z5rhcgappvsn57j.streamlit.app/
+
+GCP Cloud Run (Production-style):
+https://skillscout-app-821864398756.europe-west3.run.app
+
+This demonstrates both rapid prototyping and production-ready cloud deployment.
+
+🔐 Secrets Management
+
+API keys are never hard-coded
+
+Secrets are injected via environment variables
+
+Safe for public GitHub repositories
+
+📘 Documentation
+
+Additional technical documentation:
+
+docs/ARCHITECTURE.md – System & agent architecture
+
+docs/PROMPTS.md – Prompt engineering strategy
+
+docs/GCP_DEPLOYMENT.md – Step-by-step GCP deployment
+
+📜 License
+
+Educational and demonstration use only. Free to modify and extend.
+
+🙌 Acknowledgements
+
+Built as an AI/ML hiring assistant demo and extended into a production-style, cloud-deployed system using Streamlit, OpenAI LLMs, and Google Cloud Platform.
