@@ -1,6 +1,5 @@
-# llm_client.py
-
-"""LLM client layer for the SkillScout multi-agent hiring assistant.
+"""
+LLM client layer for the SkillScout multi-agent hiring assistant.
 
 Design decisions:
 - Model selection is explicit per agent (no hidden defaults).
@@ -9,19 +8,21 @@ Design decisions:
 - This module ONLY talks to the LLM and returns strings.
 
 Agents:
-1. Role Understanding Agent          -> normalizes desired roles / seniority
-2. Skill Summary Agent               -> rewrites raw tech stack for UI
-3. Category Question Agent (context-aware) -> generates ONE question per call
-4. Fallback / Guardrail Agent        -> handles off-track messages
+1. Role Understanding Agent
+2. Skill Summary Agent
+3. Category Question Agent (context-aware)
+4. Fallback / Guardrail Agent
 
-To keep the agent from "forgetting" context, the app passes
-short-term memory explicitly (e.g., previously asked questions, key answers)
-into the user prompt for the Category Question Agent.
+This version is production-safe:
+- Exponential backoff
+- Graceful degradation
+- Never crashes the Streamlit app
 """
 
 from typing import Optional, List
-
 import time
+import os
+
 from openai import OpenAI, APIError, APITimeoutError, RateLimitError
 
 from prompts import (
@@ -35,29 +36,23 @@ from prompts import (
     build_fallback_user_prompt,
 )
 
-
 # -------------------------------------------------------------------
-# Model configuration (single source of truth)
+# Model configuration
 # -------------------------------------------------------------------
 
-# Higher-reasoning model for intent / role understanding
 ROLE_AGENT_MODEL = "gpt-5.2"
-
-# Deterministic, cost-effective models for structured tasks
 SKILL_SUMMARY_MODEL = "gpt-4o-mini"
 QUESTION_AGENT_MODEL = "gpt-4o-mini"
 FALLBACK_AGENT_MODEL = "gpt-4o-mini"
 
-
 # -------------------------------------------------------------------
-# OpenAI client (lazy initialization)
+# OpenAI client (lazy init)
 # -------------------------------------------------------------------
 
 _client: Optional[OpenAI] = None
 
 
 def get_client() -> OpenAI:
-    """Create the OpenAI client once and reuse it."""
     global _client
     if _client is None:
         _client = OpenAI()
@@ -65,7 +60,7 @@ def get_client() -> OpenAI:
 
 
 # -------------------------------------------------------------------
-# Internal helpers – NO default model on purpose
+# Centralized Safe LLM Call
 # -------------------------------------------------------------------
 
 def _safe_chat_completion(
@@ -74,21 +69,22 @@ def _safe_chat_completion(
     user_prompt: str,
     model: str,
     temperature: float = 0.3,
-    max_retries: int = 2,
-    base_sleep: int = 4,
+    max_retries: int = 3,
+    base_sleep: int = 2,
 ) -> str:
-    """Centralized OpenAI call with retry + backoff.
-
-    Tuned for interactive use:
-    - Fail fast enough that the user is not waiting 60+ seconds.
-    - Still retries briefly on transient rate limits or network hiccups.
     """
+    Production-safe OpenAI call with:
+    - Exponential backoff
+    - Graceful fallback
+    - No app crashes
+    """
+
     client = get_client()
     last_exception: Exception | None = None
 
     for attempt in range(1, max_retries + 1):
         try:
-            resp = client.chat.completions.create(
+            response = client.chat.completions.create(
                 model=model,
                 temperature=temperature,
                 messages=[
@@ -96,23 +92,34 @@ def _safe_chat_completion(
                     {"role": "user", "content": user_prompt},
                 ],
             )
-            return resp.choices[0].message.content.strip()
+
+            return response.choices[0].message.content.strip()
 
         except RateLimitError as e:
-            # Short exponential backoff on rate limits (e.g. 4s, then 8s)
+            last_exception = e
+            sleep_time = base_sleep * (2 ** (attempt - 1))
+            time.sleep(sleep_time)
+
+        except (APITimeoutError, APIError) as e:
             last_exception = e
             sleep_time = base_sleep * attempt
             time.sleep(sleep_time)
 
-        except (APITimeoutError, APIError) as e:
-            # Smaller backoff on generic API issues
+        except Exception as e:
             last_exception = e
-            time.sleep(3 * attempt)
+            time.sleep(base_sleep)
 
-    # If we reach here, all retries failed
-    raise RuntimeError(
-        "LLM request failed after retries. Likely due to sustained rate limits or API instability."
-    ) from last_exception
+    # ---------------------------
+    # Graceful Degradation
+    # ---------------------------
+
+    print("LLM ERROR:", last_exception)
+
+    # Fallback question instead of crashing
+    return (
+        "I’m currently experiencing a temporary issue generating the next "
+        "question. Could you briefly elaborate more on your last answer?"
+    )
 
 
 def _chat_completion(
@@ -121,11 +128,6 @@ def _chat_completion(
     model: str,
     temperature: float = 0.3,
 ) -> str:
-    """Thin wrapper for backward compatibility.
-
-    All agents should go through this function; it delegates to
-    :func:`_safe_chat_completion` so that retry behaviour is consistent.
-    """
     return _safe_chat_completion(
         system_prompt=system_prompt,
         user_prompt=user_prompt,
@@ -135,11 +137,10 @@ def _chat_completion(
 
 
 # -------------------------------------------------------------------
-# Agent 1: Role Understanding Agent (GPT-5.2)
+# Agent 1: Role Understanding
 # -------------------------------------------------------------------
 
 def generate_role_summary(desired_positions: str, years_experience: str) -> str:
-    """Normalize desired roles and seniority from free-form candidate input."""
     user_prompt = build_role_agent_user_prompt(desired_positions, years_experience)
 
     return _chat_completion(
@@ -151,11 +152,10 @@ def generate_role_summary(desired_positions: str, years_experience: str) -> str:
 
 
 # -------------------------------------------------------------------
-# Agent 2: Skill Summary Agent (GPT-4o-mini)
+# Agent 2: Skill Summary
 # -------------------------------------------------------------------
 
 def generate_skill_summary(raw_tech_stack: str) -> str:
-    """Produce a clean, recruiter-friendly summary of the candidate's tech stack."""
     user_prompt = build_skill_summary_user_prompt(raw_tech_stack)
 
     return _chat_completion(
@@ -167,7 +167,7 @@ def generate_skill_summary(raw_tech_stack: str) -> str:
 
 
 # -------------------------------------------------------------------
-# Agent 3: Category-based Question Generator (context-aware)
+# Agent 3: Technical Question Generator
 # -------------------------------------------------------------------
 
 def generate_category_question(
@@ -182,16 +182,7 @@ def generate_category_question(
     answers_in_category: Optional[List[str]] = None,
     last_answer: str = "",
 ) -> str:
-    """Generate ONE technical question for a specific skill category.
 
-    IMPORTANT:
-    - The LLM itself is stateless.
-    - Short-term memory (previous questions / answers) is managed by the app
-      and passed explicitly here.
-    - `prompts.build_category_question_user_prompt` builds the core prompt,
-      and we optionally enrich it with a compact view of recent answers so
-      that the model can ask follow-up questions.
-    """
     user_prompt = build_category_question_user_prompt(
         full_name=full_name,
         years_experience=years_experience,
@@ -203,26 +194,21 @@ def generate_category_question(
         previously_asked_questions=previously_asked_questions,
     )
 
-    # Optionally append a short answer history block for follow-ups
+    # Append answer history for follow-up depth
     extra_context_parts: List[str] = []
+
     if answers_in_category:
         joined_answers = "\n".join(
             f"- {a}" for a in answers_in_category if a.strip()
         )
         if joined_answers:
             extra_context_parts.append(
-                (
-                    "\n\nHere are the candidate's recent answers in this category "
-                    "(most recent last):\n"
-                    f"{joined_answers}"
-                )
+                "\n\nRecent answers in this category:\n" + joined_answers
             )
 
     if last_answer:
         extra_context_parts.append(
-            "\n\nMost recent answer in this category "
-            "(for immediate follow-up):\n"
-            f"{last_answer}"
+            "\n\nMost recent answer:\n" + last_answer
         )
 
     if extra_context_parts:
@@ -237,11 +223,10 @@ def generate_category_question(
 
 
 # -------------------------------------------------------------------
-# Agent 4: Fallback / Guardrail Agent (GPT-4o-mini)
+# Agent 4: Fallback / Guardrail
 # -------------------------------------------------------------------
 
 def generate_fallback_response(user_message: str, current_state: str) -> str:
-    """Handle unclear or unrelated candidate messages and steer back to screening."""
     user_prompt = build_fallback_user_prompt(user_message, current_state)
 
     return _chat_completion(
