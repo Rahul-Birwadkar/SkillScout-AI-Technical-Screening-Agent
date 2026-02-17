@@ -40,7 +40,7 @@ from prompts import (
 # Model configuration
 # -------------------------------------------------------------------
 
-ROLE_AGENT_MODEL = " "gpt-4o-mini"
+ROLE_AGENT_MODEL = "gpt-4o-mini"
 SKILL_SUMMARY_MODEL = "gpt-4o-mini"
 QUESTION_AGENT_MODEL = "gpt-4o-mini"
 FALLBACK_AGENT_MODEL = "gpt-4o-mini"
@@ -235,4 +235,5 @@ def generate_fallback_response(user_message: str, current_state: str) -> str:
         model=FALLBACK_AGENT_MODEL,
         temperature=0.4,
     )
+
 
